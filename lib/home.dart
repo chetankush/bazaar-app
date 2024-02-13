@@ -89,7 +89,8 @@ class Home extends StatelessWidget {
                 'Bazaar',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 54,
+                  fontSize: 44,
+
                 ),
               ),
             ),
