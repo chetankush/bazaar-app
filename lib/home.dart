@@ -32,19 +32,40 @@ class Home extends StatelessWidget {
           },
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CartPage(cartItems: Provider.of<CartProvider>(context, listen: false).cartItems),
+          Stack(
+            children: [
+              IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CartPage(cartItems: Provider.of<CartProvider>(context, listen: false).cartItems),
+                    ),
+                  );
+                },
+              ),
+              Positioned(
+                right: 0,
+                child: Consumer<CartProvider>(
+                  builder: (context, cartProvider, child) {
+                    int itemCount = cartProvider.cartItems.length;
+                    return CircleAvatar(
+                      backgroundColor: Colors.red,
+                      radius: 8,
+                      child: Text(
+                        '$itemCount',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
+              ),
+            ],
           ),
-
-
         ],
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
