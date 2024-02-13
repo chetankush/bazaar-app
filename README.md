@@ -44,7 +44,9 @@ Login and registration screens.
 Utilizes Firebase Authentication for user management.
 Data Display:
 
-Fetches and displays data from a public API.
+Fetches and displays data from a NODE JS API created by me.                                        
+  
+  
 Visual representation of the fetched data.
 State Management:
 
