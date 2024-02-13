@@ -124,6 +124,16 @@ class _LogInState extends State<LogIn> {
                     ),
                     GestureDetector(
                       onTap: () {
+
+
+                        print('please wait google sign authentication is working');
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Please wait we are taking you Home'),
+                          ),
+                        );
+
                         if (_formkey.currentState!.validate()) {
                           setState(() {
                             email = mailcontroller.text;
@@ -197,6 +207,14 @@ class _LogInState extends State<LogIn> {
                 GestureDetector(
                   onTap: () {
                     AuthMethods().signInWithGoogle(context);
+                    print('please wait google sign authentication is working');
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Please wait we are taking you Home'),
+                      ),
+                    );
+
                   },
                   child: Image.asset(
                     "images/google.png",

@@ -1,5 +1,6 @@
 import 'package:baazar/home.dart';
 import 'package:baazar/login.dart';
+import 'package:baazar/service/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -124,19 +125,24 @@ class _SignUpState extends State<SignUp> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    "images/google.png",
-                    height: 45,
-                    width: 45,
-                    fit: BoxFit.cover,
+                  GestureDetector(
+                    onTap: () {
+                      AuthMethods().signInWithGoogle(context);
+                      print('please wait google sign authentication is working');
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Please wait we are taking you Home'),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      "images/google.png",
+                      height: 45,
+                      width: 45,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  SizedBox(width: 30.0),
-                  Image.asset(
-                    "images/apple1.png",
-                    height: 50,
-                    width: 50,
-                    fit: BoxFit.cover,
-                  )
                 ],
               ),
               SizedBox(height: 40.0),

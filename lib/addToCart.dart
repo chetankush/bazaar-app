@@ -23,45 +23,56 @@ class CartPage extends StatelessWidget {
               return ProductCard(
                 product: item,
                 isInCart: true,
-                removeFromCart: cartProvider.removeFromCart,
+                removeFromCart: (product) {
+                  cartProvider.removeFromCart(product);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Removed from Cart'),
+                    ),
+                  );
+                },
               );
             },
           );
         },
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Total: \$${calculateTotal()}',
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+      bottomNavigationBar: Consumer<CartProvider>(
+        builder: (context, cartProvider, child) {
+          return BottomAppBar(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Total: \$${calculateTotal(cartProvider.cartItems)}',
+                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Implement your checkout logic here
+                      // For now, it just shows a snackbar
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Checkout button pressed'),
+                        ),
+                      );
+                    },
+                    child: Text('Checkout'),
+                  ),
+                ],
               ),
-              ElevatedButton(
-                onPressed: () {
-                  // Implement your checkout logic here
-                  // For now, it just shows a snackbar
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Checkout button pressed'),
-                    ),
-                  );
-                },
-                child: Text('Checkout'),
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
 
   // Function to calculate the total price of items in the cart
-  String calculateTotal() {
+  String calculateTotal(List<Map<String, dynamic>> items) {
     double total = 0;
-    for (var item in cartItems) {
+    for (var item in items) {
       total += item['price'];
     }
     return total.toStringAsFixed(2);
@@ -125,12 +136,6 @@ class ProductCard extends StatelessWidget {
                 onPressed: () {
                   // Call the provided removeFromCart callback
                   removeFromCart(product);
-                  print('Product Removed from Cart');
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Removed from Cart'),
-                    ),
-                  );
                 },
                 child: Text("Remove from Cart"),
               ),
