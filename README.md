@@ -7,8 +7,9 @@
 ![WhatsApp Image 2024-02-13 at 11 05 15](https://github.com/chetankush/bazaar-app/assets/78559285/544653ca-29f3-4872-a7e9-847a17297acf)
 ![WhatsApp Image 2024-02-13 at 11 07 59](https://github.com/chetankush/bazaar-app/assets/78559285/5d6cfa59-57bc-4c57-8641-bf868e188057)                
 ![WhatsApp Image 2024-02-13 at 11 05 30](https://github.com/chetankush/bazaar-app/assets/78559285/8035188a-44db-431a-b904-6bdb0b64c7eb)
-                   
-![WhatsApp Image 2024-02-13 at 11 18 29](https://github.com/chetankush/bazaar-app/assets/78559285/63e000bb-d6f7-40f5-ac35-dbb28938b7ec)
+![WhatsApp Image 2024-02-13 at 11 29 53](https://github.com/chetankush/bazaar-app/assets/78559285/c9a8911d-8e3f-4cdf-a0cf-9cf85268b475)
+                      
+  
 
 
 Baazar is a Flutter mobile application that serves as a platform for exploring and displaying data from various public APIs. The app incorporates user authentication, data fetching, and efficient state management using Provider and follows MVVM architecture principles.
@@ -26,6 +27,8 @@ This project is a Flutter application designed to showcase the integration of us
 
 1. Clone the repository:
 
+                    
+  
 
   ```bash
      # Clone the repository
