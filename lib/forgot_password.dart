@@ -39,7 +39,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("Reset password"),
+        title: Text("Reset password",
+        style: TextStyle(
+          color: Colors.white
+        ),
+          selectionColor: Colors.white,
+        ),
+
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
@@ -73,11 +79,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 child: Form(
                     key: _formkey,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 10.0),
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
                       child: ListView(
                         children: [
                           Container(
-                            padding: EdgeInsets.only(left: 10.0),
+                            padding: EdgeInsets.only(left: 10.0, right: 10.0),
                             decoration: BoxDecoration(
                               border:
                               Border.all(color: Colors.white70, width: 2.0),

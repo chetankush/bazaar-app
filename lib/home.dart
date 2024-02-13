@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart' as http;
@@ -6,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'addToCart.dart';
 import 'cartProvider.dart';
+import 'login.dart';
 
 class Home extends StatelessWidget {
   Future<List<Map<String, dynamic>>> fetchData() async {
@@ -37,19 +39,22 @@ class Home extends StatelessWidget {
         actions: [
           Stack(
             children: [
-              IconButton(
-                icon: Icon(Icons.shopping_cart),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CartPage(cartItems: Provider.of<CartProvider>(context, listen: false).cartItems),
-                    ),
-                  );
-                },
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: IconButton(
+                  icon: Icon(Icons.shopping_cart),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(cartItems: Provider.of<CartProvider>(context, listen: false).cartItems),
+                      ),
+                    );
+                  },
+                ),
               ),
               Positioned(
-                right: 0,
+                right: 7,
                 child: Consumer<CartProvider>(
                   builder: (context, cartProvider, child) {
                     int itemCount = cartProvider.cartItems.length;
@@ -103,9 +108,31 @@ class Home extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
+            ListTile(
+              title: Text('Logout'),
+              leading: Icon(Icons.logout),
+              onTap: () async {
+                // Handle logout action here
+                await FirebaseAuth.instance.signOut();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('you are Logged out'),
+                  ),
+                );
+                // Simulate sign out by pushing the user to the sign-in page
+                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LogIn()),
+                );
+
+              },
+            ),
+
           ],
         ),
       ),
+
 
 
       body: FutureBuilder<List<Map<String, dynamic>>>(
