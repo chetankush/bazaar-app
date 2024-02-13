@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'cartProvider.dart';
 
 class CartPage extends StatelessWidget {
   final List<Map<String, dynamic>> cartItems;
@@ -11,11 +14,19 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Shopping Cart"),
       ),
-      body: ListView.builder(
-        itemCount: cartItems.length,
-        itemBuilder: (context, index) {
-          final item = cartItems[index];
-          return ProductCard(product: item, isInCart: true);
+      body: Consumer<CartProvider>(
+        builder: (context, cartProvider, child) {
+          return ListView.builder(
+            itemCount: cartItems.length,
+            itemBuilder: (context, index) {
+              final item = cartItems[index];
+              return ProductCard(
+                product: item,
+                isInCart: true,
+                removeFromCart: cartProvider.removeFromCart,
+              );
+            },
+          );
         },
       ),
       bottomNavigationBar: BottomAppBar(
@@ -60,8 +71,13 @@ class CartPage extends StatelessWidget {
 class ProductCard extends StatelessWidget {
   final Map<String, dynamic> product;
   final bool isInCart;
+  final Function(Map<String, dynamic>) removeFromCart;
 
-  ProductCard({required this.product, required this.isInCart});
+  ProductCard({
+    required this.product,
+    required this.isInCart,
+    required this.removeFromCart,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -107,11 +123,12 @@ class ProductCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  // Implement your remove from cart logic here
-                  // For now, it just shows a snackbar
+                  // Call the provided removeFromCart callback
+                  removeFromCart(product);
+                  print('Product Removed from Cart');
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text('Remove from Cart button pressed'),
+                      content: Text('Removed from Cart'),
                     ),
                   );
                 },
