@@ -93,21 +93,7 @@ class Home extends StatelessWidget {
                 ),
               ),
             ),
-            ListTile(
-              title: Text('Your Profile'),
-              leading: Icon(Icons.account_circle),
-              onTap: () {
-                // Handle the profile action here
-                // For now, it just shows a snackbar
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Profile pressed'),
-                  ),
-                );
-                // Close the drawer after handling the action
-                Navigator.pop(context);
-              },
-            ),
+
             ListTile(
               title: Text('Logout'),
               leading: Icon(Icons.logout),
