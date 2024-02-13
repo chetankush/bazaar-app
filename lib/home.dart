@@ -83,27 +83,38 @@ class Home extends StatelessWidget {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.black,
               ),
-              child: Text(
-                'Bazaar',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 44,
-
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    'Bazaar',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
-
             ListTile(
-              title: Text('Logout'),
-              leading: Icon(Icons.logout),
+              title: Text(
+                'Logout',
+                style: TextStyle(fontSize: 18),
+              ),
+              leading: Icon(
+                Icons.logout,
+                size: 24,
+              ),
               onTap: () async {
                 // Handle logout action here
                 await FirebaseAuth.instance.signOut();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('you are Logged out'),
+                    content: Text('You are logged out'),
                   ),
                 );
                 // Simulate sign out by pushing the user to the sign-in page
@@ -112,10 +123,8 @@ class Home extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => LogIn()),
                 );
-
               },
             ),
-
           ],
         ),
       ),
