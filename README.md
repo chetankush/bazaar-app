@@ -15,5 +15,15 @@ This project is a Flutter application designed to showcase the integration of us
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/yourusername/baazar-flutter-app.git
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/baazar-flutter-app.git
+
+# Change directory
+cd baazar-flutter-app
+
+# Install dependencies
+flutter pub get                    
+                      
+  
