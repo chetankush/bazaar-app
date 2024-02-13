@@ -1,8 +1,9 @@
-import 'package:baazar/home.dart';
+import 'package:flutter/material.dart';
 import 'package:baazar/login.dart';
 import 'package:baazar/service/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+
+import 'home.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key});
@@ -61,10 +62,24 @@ class _SignUpState extends State<SignUp> {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              Image.asset(
-                "images/car.png",
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width,
+              SizedBox(height: 80.0),
+              Column(
+                children: [
+                  Text(
+                    "Bazaar",
+                    style: TextStyle(fontSize: 54.0, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 16.0),
+                  Text(
+                    "Create an account",
+                    style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 8.0),
+                  Text(
+                    "Sign up to get started",
+                    style: TextStyle(fontSize: 16.0, color: Colors.grey),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 30.0,
@@ -96,7 +111,7 @@ class _SignUpState extends State<SignUp> {
                           width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.symmetric(vertical: 13.0, horizontal: 30.0),
                           decoration: BoxDecoration(
-                              color: Color(0xFF273671),
+                              color: Colors.black,
                               borderRadius: BorderRadius.circular(30)),
                           child: Center(
                             child: Text(
@@ -115,10 +130,10 @@ class _SignUpState extends State<SignUp> {
               ),
               SizedBox(height: 40.0),
               Text(
-                "or LogIn with",
+                "or Sign Up with",
                 style: TextStyle(
-                    color: Color(0xFF273671),
-                    fontSize: 22.0,
+                    color: Colors.black,
+                    fontSize: 18.0,
                     fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 30.0),
@@ -128,8 +143,6 @@ class _SignUpState extends State<SignUp> {
                   GestureDetector(
                     onTap: () {
                       AuthMethods().signInWithGoogle(context);
-                      print('please wait google sign authentication is working');
-
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('Please wait we are taking you Home'),
@@ -152,7 +165,7 @@ class _SignUpState extends State<SignUp> {
                   Text(
                     "Already have an account?",
                     style: TextStyle(
-                        color: Color(0xFF8c8e98),
+                        color: Colors.grey,
                         fontSize: 18.0,
                         fontWeight: FontWeight.w500),
                   ),
@@ -163,9 +176,9 @@ class _SignUpState extends State<SignUp> {
                           context, MaterialPageRoute(builder: (context) => LogIn()));
                     },
                     child: Text(
-                      "LogIn",
+                      "Sign In",
                       style: TextStyle(
-                          color: Color(0xFF273671),
+                          color: Colors.black,
                           fontSize: 20.0,
                           fontWeight: FontWeight.w500),
                     ),

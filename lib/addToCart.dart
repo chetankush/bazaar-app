@@ -78,7 +78,6 @@ class CartPage extends StatelessWidget {
     return total.toStringAsFixed(2);
   }
 }
-
 class ProductCard extends StatelessWidget {
   final Map<String, dynamic> product;
   final bool isInCart;
@@ -92,55 +91,91 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Image.network(
-            product['image'],
-            height: 200.0,
-            width: double.infinity,
-            fit: BoxFit.cover,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  product['name'],
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
+    return Container(
+      height: 300.0,
+      margin: EdgeInsets.all(10.0),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        elevation: 4,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(12.0),
+                topRight: Radius.circular(12.0),
+              ),
+              child: Container(
+                height: 120.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(product['image']),
+                    fit: BoxFit.cover,
                   ),
                 ),
-                Text(
-                  product['description'],
-                  style: TextStyle(fontSize: 14.0),
-                ),
-                Text(
-                  '\$${product['price']}',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (isInCart)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Call the provided removeFromCart callback
-                  removeFromCart(product);
-                },
-                child: Text("Remove from Cart"),
               ),
             ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 8.0),
+                  Text(
+                    product['name'],
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(height: 8.0),
+                  Text(
+                    product['description'],
+                    style: TextStyle(fontSize: 14.0),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(height: 8.0),
+                  Text(
+                    '\$${product['price']}',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (isInCart)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    // Call the provided removeFromCart callback
+                    removeFromCart(product);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                  label: Text(
+                    "Remove from Cart",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+
+          ],
+        ),
       ),
     );
   }

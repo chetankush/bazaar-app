@@ -112,19 +112,22 @@ class Home extends StatelessWidget {
                   children: products.map((product) {
                     return Container(
                       height: 300.0,
-                      margin: EdgeInsets.only(
-                        top: 20.0,
-                        left: 10.0,
-                        bottom: 10.0,
-                        right: 10.0,
-                      ),
+                      margin: EdgeInsets.all(10.0),
                       child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        elevation: 4,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Flexible(
-                              flex: 2,
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(12.0),
+                                topRight: Radius.circular(12.0),
+                              ),
                               child: Container(
-                                height: 200.0,
+                                height: 120.0,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: NetworkImage(product['image']),
@@ -133,69 +136,65 @@ class Home extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Flexible(
-                              flex: 2,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 20.0,
-                                  left: 12.0,
-                                  bottom: 10.0,
-                                  right: 12.0,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(height: 16.0),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              product['name'],
-                                              style: TextStyle(
-                                                fontSize: 18.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text(
-                                              product['description'],
-                                              style: TextStyle(fontSize: 14.0),
-                                            ),
-                                            Text(
-                                              '\$${product['price']}',
-                                              style: TextStyle(
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.green,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            // Handle Add to Cart button press
-                                            Provider.of<CartProvider>(context,
-                                                listen: false)
-                                                .addToCart(product);
-                                            print('Product Added to Cart');
-
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(
-                                                content: Text('Added to Cart'),
-                                              ),
-                                            );
-
-                                          },
-                                          child: Text("Add to Cart"),
-                                        ),
-                                      ],
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 8.0),
+                                  Text(
+                                    product['name'],
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  ],
-                                ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Text(
+                                    product['description'],
+                                    style: TextStyle(fontSize: 14.0),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Text(
+                                    '\$${product['price']}',
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                  SizedBox(height: 12.0),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      // Handle Add to Cart button press
+                                      Provider.of<CartProvider>(context, listen: false)
+                                          .addToCart(product);
+                                      print('Product Added to Cart');
+
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text('Added to Cart'),
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.black,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                                      child: Text(
+                                        "Add to Cart",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
@@ -204,6 +203,7 @@ class Home extends StatelessWidget {
                     );
                   }).toList(),
                 ),
+
               ],
             );
           }
