@@ -25,11 +25,14 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: Text("Bazaar"),
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.add_business),
-          onPressed: () {
-            // Handle wishlist icon press
-          },
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: Icon(Icons.account_circle_outlined),
+            onPressed: () {
+              // Open the drawer when the profile icon is pressed
+              Scaffold.of(context).openDrawer();
+            },
+          ),
         ),
         actions: [
           Stack(
@@ -68,6 +71,43 @@ class Home extends StatelessWidget {
           ),
         ],
       ),
+
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Text(
+                'Bazaar',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 54,
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text('Your Profile'),
+              leading: Icon(Icons.account_circle),
+              onTap: () {
+                // Handle the profile action here
+                // For now, it just shows a snackbar
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Profile pressed'),
+                  ),
+                );
+                // Close the drawer after handling the action
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+
+
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: fetchData(),
         builder: (context, snapshot) {
@@ -111,7 +151,7 @@ class Home extends StatelessWidget {
                 Column(
                   children: products.map((product) {
                     return Container(
-                      height: 300.0,
+                      height: 330.0,
                       margin: EdgeInsets.all(10.0),
                       child: Card(
                         shape: RoundedRectangleBorder(
@@ -209,6 +249,7 @@ class Home extends StatelessWidget {
           }
         },
       ),
+
     );
   }
 }
