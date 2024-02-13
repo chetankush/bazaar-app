@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'firebase_options.dart';  // Ensure you import necessary files
-import 'login.dart'; // Import the LogIn widget
-import 'cartProvider.dart';  // Import the CartProvider class
+import 'firebase_options.dart';
+import 'login.dart';
+import 'home.dart';  // Import the Home widget
+import 'cartProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -14,7 +15,6 @@ late final FirebaseAuth auth;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // We store the app and auth to make testing with a named instance easier.
   app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -47,7 +47,22 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: LogIn(), // Use LogIn widget as the home
+      home: AuthenticationWrapper(), // Use AuthenticationWrapper widget as the home
     );
+  }
+}
+
+class AuthenticationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final user = auth.currentUser;
+
+    if (user == null) {
+      // User is not authenticated, show login page
+      return LogIn();
+    } else {
+      // User is authenticated, show home page
+      return Home();
+    }
   }
 }
