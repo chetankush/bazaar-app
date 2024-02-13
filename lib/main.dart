@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';  // Ensure you import necessary files
-import 'home.dart';
-import 'login.dart';
+import 'login.dart'; // Import the LogIn widget
 import 'cartProvider.dart';  // Import the CartProvider class
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -48,7 +47,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Home(),
+      home: LogIn(), // Use LogIn widget as the home
     );
   }
 }
